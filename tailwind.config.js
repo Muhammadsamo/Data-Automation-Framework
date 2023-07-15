@@ -14,6 +14,11 @@ module.exports = {
         Exo: ["Exo", "sans-serif"],
         OpenSans: ["Open Sans", "sans-serif"],
       },
+      colors: {
+        primary: "#1F78C9",
+        "input-border": "#D5D5D5",
+        gray: "#8A97A5",
+      },
     },
   },
   plugins: [],
