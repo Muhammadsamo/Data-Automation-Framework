@@ -15,10 +15,14 @@
         :class="{ 'rotate-180': !sidebarOpen }"
       />
     </span>
+    <h1 class="text-[#5B5B5B] text-[20px] leading-[28px] font-bold">
+      {{ title }}
+    </h1>
   </div>
 </template>
 
 <script setup>
+defineProps([{ title: String }]);
 const sidebarOpen = ref(true);
 
 const toggleSidebar = () => {

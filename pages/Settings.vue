@@ -6,4 +6,3 @@
     </h1>
   </main>
 </template>
-
