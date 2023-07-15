@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: "Open Sans", sans-serif;
+
+@layer base {
+  html {
+    font-family: "Open Sans", "sans-serif";
+  }
 }

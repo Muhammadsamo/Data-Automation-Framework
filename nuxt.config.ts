@@ -2,8 +2,10 @@
 export default defineNuxtConfig({
   target: "static",
   devtools: { enabled: true },
-
-  modules: ["@pinia/nuxt"],
+  typescript: {
+    typeCheck: true,
+  },
+  modules: ["@pinia/nuxt", "@vee-validate/nuxt"],
   components: {
     global: true,
     dirs: ["~/components"],
