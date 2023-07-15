@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-screen fixed left-0 bg-[#F1F1F1] w-[313px] transition-all ease"
+    class="h-screen fixed left-0 bg-[#F1F1F1] w-[313px] transition-all ease duration-300 px-[20px] py-[24px]"
     :class="{ '-translate-x-[100%]': !sidebarOpen }"
   >
     <span
