@@ -1,7 +1,7 @@
 <template>
   <div>
     <TheHeader />
-    <NuxtPage />
+    <NuxtPage :keepalive="{}" />
   </div>
 </template>
 
