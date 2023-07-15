@@ -1,14 +1,21 @@
 <template>
   <nav>
-    <ul class="flex gap-x-[23px] items-center w-[480px]">
-      <li v-for="link in links" :key="link.pageId">
+    <ul class="flex justify-between items-center w-[520px]">
+      <li v-for="link in links" :key="link.pageId" class="min-h-[32px]">
         <NuxtLink
           :to="link.address"
-          class="font-Exo font-bold text-[12px] text-[#FFFFFF] tracking-[1.2px] px-[16px] py-8px"
+          class="font-Exo font-bold text-[12px] text-[#FFFFFF] tracking-[1.2px] px-[16px] py-[8px] hover:border border-[#1A67AC] rounded-[3px] hover:bg-[#114471]"
           >{{ link.name }}</NuxtLink
         >
       </li>
-      <li><img src="/header/profile-icon.svg" alt="profile-icon" /></li>
+      <li class="cursor-pointer min-h-[20px] min-w-[20px]">
+        <img
+          src="/header/profile-icon.svg"
+          width="20"
+          height="20"
+          alt="profile-icon"
+        />
+      </li>
     </ul>
   </nav>
 </template>
@@ -37,3 +44,10 @@ const links = [
   },
 ];
 </script>
+
+<style scoped>
+.router-link-active {
+  border: 3px solid #1a67ac;
+  background-color: #114471;
+}
+</style>

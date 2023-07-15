@@ -4,6 +4,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: ["@pinia/nuxt"],
+  components: {
+    global: true,
+    dirs: ["~/components"],
+  },
   css: ["~/assets/css/main.css"],
   postcss: {
     plugins: {

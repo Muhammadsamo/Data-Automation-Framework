@@ -1,4 +1,4 @@
-import { version, getCurrentInstance, inject, ref, watchEffect, watch, defineComponent, computed, h, resolveComponent, useSSRContext, createApp, reactive, unref, hasInjectionContext, provide, onErrorCaptured, onServerPrefetch, createVNode, resolveDynamicComponent, toRef, shallowRef, shallowReactive, isReadonly, defineAsyncComponent, isRef, effectScope, markRaw, isShallow, isReactive, toRaw, mergeProps, nextTick, Suspense, Transition, withCtx, createTextVNode, toDisplayString } from 'vue';
+import { version, defineAsyncComponent, getCurrentInstance, inject, ref, watchEffect, watch, defineComponent, computed, h, resolveComponent, useSSRContext, createApp, reactive, unref, withCtx, createTextVNode, toDisplayString, mergeProps, createVNode, hasInjectionContext, provide, onErrorCaptured, onServerPrefetch, resolveDynamicComponent, toRef, shallowRef, shallowReactive, isReadonly, isRef, effectScope, markRaw, isShallow, isReactive, toRaw, nextTick, Suspense, Transition } from 'vue';
 import { $fetch } from 'ofetch';
 import { createHooks } from 'hookable';
 import { getContext, executeAsync } from 'unctx';
@@ -8,7 +8,7 @@ import { hasProtocol, parseURL, parseQuery, withTrailingSlash, withoutTrailingSl
 import { renderSSRHead } from '@unhead/ssr';
 import { getActiveHead, createServerHead as createServerHead$1 } from 'unhead';
 import { defineHeadPlugin } from '@unhead/shared';
-import { ssrRenderSuspense, ssrRenderComponent, ssrRenderVNode, ssrRenderAttrs, ssrRenderAttr, ssrRenderList, ssrInterpolate } from 'vue/server-renderer';
+import { ssrRenderAttrs, ssrRenderList, ssrRenderComponent, ssrInterpolate, ssrRenderAttr, ssrRenderSuspense, ssrRenderVNode } from 'vue/server-renderer';
 import { defu } from 'defu';
 import { a as useRuntimeConfig$1 } from '../nitro/netlify.mjs';
 import 'node-fetch-native/polyfill';
@@ -933,8 +933,24 @@ const revive_payload_server_EpP8IAGBjr = /* @__PURE__ */ defineNuxtPlugin({
     }
   }
 });
+const LazyMainNav = defineAsyncComponent(() => Promise.resolve().then(function() {
+  return MainNav;
+}).then((r) => r.default));
+const LazyTheHeader = defineAsyncComponent(() => Promise.resolve().then(function() {
+  return TheHeader;
+}).then((r) => r.default));
+const lazyGlobalComponents = [
+  ["MainNav", LazyMainNav],
+  ["TheHeader", LazyTheHeader]
+];
 const components_plugin_KR1HBZs4kY = /* @__PURE__ */ defineNuxtPlugin({
-  name: "nuxt:global-components"
+  name: "nuxt:global-components",
+  setup(nuxtApp) {
+    for (const [name, component] of lazyGlobalComponents) {
+      nuxtApp.vueApp.component(name, component);
+      nuxtApp.vueApp.component("Lazy" + name, component);
+    }
+  }
 });
 const unhead_0yLUU14bfA = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:head",
@@ -964,6 +980,13 @@ const plugins = [
   unhead_0yLUU14bfA
 ];
 const _imports_0$1 = "" + __publicAssetsURL("header/profile-icon.svg");
+const _export_sfc = (sfc, props) => {
+  const target = sfc.__vccOpts || sfc;
+  for (const [key, val] of props) {
+    target[key] = val;
+  }
+  return target;
+};
 const _sfc_main$4 = {
   __name: "MainNav",
   __ssrInlineRender: true,
@@ -992,12 +1015,12 @@ const _sfc_main$4 = {
     ];
     return (_ctx, _push, _parent, _attrs) => {
       const _component_NuxtLink = __nuxt_component_0$1;
-      _push(`<nav${ssrRenderAttrs(_attrs)}><ul class="flex gap-x-[23px] items-center w-[480px]"><!--[-->`);
+      _push(`<nav${ssrRenderAttrs(_attrs)} data-v-d621f5c0><ul class="flex justify-between items-center w-[520px]" data-v-d621f5c0><!--[-->`);
       ssrRenderList(links, (link) => {
-        _push(`<li>`);
+        _push(`<li class="min-h-[32px]" data-v-d621f5c0>`);
         _push(ssrRenderComponent(_component_NuxtLink, {
           to: link.address,
-          class: "font-Exo font-bold text-[12px] text-[#FFFFFF] tracking-[1.2px] px-[16px] py-8px"
+          class: "font-Exo font-bold text-[12px] text-[#FFFFFF] tracking-[1.2px] px-[16px] py-[8px] hover:border border-[#1A67AC] rounded-[3px] hover:bg-[#114471]"
         }, {
           default: withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
@@ -1012,7 +1035,7 @@ const _sfc_main$4 = {
         }, _parent));
         _push(`</li>`);
       });
-      _push(`<!--]--><li><img${ssrRenderAttr("src", _imports_0$1)} alt="profile-icon"></li></ul></nav>`);
+      _push(`<!--]--><li class="cursor-pointer min-h-[20px] min-w-[20px]" data-v-d621f5c0><img${ssrRenderAttr("src", _imports_0$1)} width="20" height="20" alt="profile-icon" data-v-d621f5c0></li></ul></nav>`);
     };
   }
 };
@@ -1022,15 +1045,12 @@ _sfc_main$4.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/MainNav.vue");
   return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
-const __nuxt_component_1$1 = _sfc_main$4;
+const __nuxt_component_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-d621f5c0"]]);
+const MainNav = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  default: __nuxt_component_1$1
+});
 const _imports_0 = "" + __publicAssetsURL("header/logo.png");
-const _export_sfc = (sfc, props) => {
-  const target = sfc.__vccOpts || sfc;
-  for (const [key, val] of props) {
-    target[key] = val;
-  }
-  return target;
-};
 const _sfc_main$3 = {};
 function _sfc_ssrRender$1(_ctx, _push, _parent, _attrs) {
   const _component_NuxtLink = __nuxt_component_0$1;
@@ -1063,6 +1083,10 @@ _sfc_main$3.setup = (props, ctx) => {
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
 const __nuxt_component_0 = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["ssrRender", _sfc_ssrRender$1]]);
+const TheHeader = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  default: __nuxt_component_0
+});
 const interpolatePath = (route, match) => {
   return match.path.replace(/(:\w+)\([^)]+\)/g, "$1").replace(/(:\w+)[?+*]/g, "$1").replace(/:\w+/g, (r) => {
     var _a;
