@@ -6,38 +6,30 @@
       @click="onClick"
       @show-content="showContent = true"
     >
-      <div class="flex-center h-full">
+      <div class="flex-center h-screen">
         <!-- Modal -->
         <Transition name="slide-fade" @after-leave="emit('update:show', false)">
-          <div
-            v-if="showContent"
-            ref="modalRef"
-            class="bg-white max-w-2xl mx-auto"
-          >
-            <!-- Modal Header -->
-            <div class="bg-secondary px-7 py-5 flex">
-              <slot name="modal-header">
-                <UIHeading :level="5">
-                  {{ heading }}
-                </UIHeading>
-                <button
-                  class="text-info text-xs ml-auto flex items-center font-bold"
-                  @click="hideModal"
-                >
-                  Cancel
-                  <SvgsCloseCircle class="ml-2" />
-                </button>
-              </slot>
-            </div>
-            <!-- Modal Body -->
-            <div class="px-7 py-5">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
-              eligendi sunt accusantium inventore corrupti enim nulla recusandae
-              voluptatibus consequuntur aperiam non suscipit et necessitatibus
-              repellendus distinctio accusamus asperiores eius, porro quisquam
-              iure repudiandae eveniet temporibus aspernatur omnis. Tenetur id
-              provident pariatur nostrum aspernatur dignissimos laboriosam culpa
-              adipisci! Aliquam, ipsum excepturi.
+          <div v-if="showContent" class="absolute inset-0 overflow-y-auto">
+            <div ref="modalRef" class="bg-white max-w-2xl mx-auto my-12">
+              <!-- Modal Header -->
+              <div class="bg-secondary px-7 py-5 flex">
+                <slot name="modal-header">
+                  <UIHeading :level="5">
+                    {{ heading }}
+                  </UIHeading>
+                  <button
+                    class="text-info text-xs ml-auto flex items-center font-bold"
+                    @click="hideModal"
+                  >
+                    Cancel
+                    <SvgsCloseCircle class="ml-2" />
+                  </button>
+                </slot>
+              </div>
+              <!-- Modal Body -->
+              <div class="px-7 py-5">
+                <slot />
+              </div>
             </div>
           </div>
         </Transition>
