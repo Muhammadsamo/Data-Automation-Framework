@@ -1,6 +1,18 @@
 <template>
   <main>
-    <SideBar title="Projects" :tabs="tabs" @setActiveTab="setActiveTab" />
+    <UISideBar title="Projects" :tabs="tabs" @setActiveTab="setActiveTab">
+      <template #sidebar-append>
+        <UIButton
+          text="New Project"
+          variant="primary"
+          class="primary flex items-center rounded w-[180px] h-[43px] absolute bottom-[90px]"
+        >
+          <template #button-prepend>
+            <SvgsButtonAdd class="mr-[11px]"></SvgsButtonAdd>
+          </template>
+        </UIButton>
+      </template>
+    </UISideBar>
     <ProjectsBRCoFReporting v-if="isActiveTab('BR CoF Reporting')" />
     <ProjectsDEFDReporting v-if="isActiveTab('DEF D Reporting')" />
     <ProjectsABCLoanFXConversion v-if="isActiveTab('ABC Loan FX Conversion')" />

@@ -10,7 +10,7 @@
       <img
         src="/sidebar/sidebar-toggle.svg"
         width="8"
-        height="13px"
+        height="13"
         alt="sidebar toggle button"
         :class="{ 'rotate-180': !sidebarOpen }"
       />
@@ -31,11 +31,16 @@
         {{ tab.tabTitle }}
       </li>
     </ul>
+
+    <slot name="sidebar-append" />
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps({ title: String, tabs: Array });
+interface IProps {
+  title?: string;
+  tabs?: any;
+}
 const emit = defineEmits(["setActiveTab"]);
 const sidebarOpen = ref(true);
 
@@ -45,15 +50,7 @@ const toggleSidebar = () => {
 
 function changeActiveTab(tab: any) {
   emit("setActiveTab", tab);
-  console.log(tab.tabTitle);
 }
 
-// const activeTab = ref("");
-
-// const setActiveTab = (tab) => {
-//   activeTab.value = tab;
-// };
-// const isActive = (tab) => {
-//   return activeTab.value === tab;
-// };
+defineProps<IProps>();
 </script>
