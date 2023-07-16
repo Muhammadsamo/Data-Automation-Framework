@@ -16,6 +16,8 @@ module.exports = {
       },
       colors: {
         primary: "#1F78C9",
+        secondary: "#185E9D",
+        info: "#66AAE8",
         "input-border": "#D5D5D5",
         gray: "#8A97A5",
       },
