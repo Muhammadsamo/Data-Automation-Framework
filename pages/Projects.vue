@@ -1,16 +1,16 @@
 <template>
   <main>
-    <SideBar title="Projects" :tabs="tabs" />
-    <h1 class="text-3xl font-bold underline text-green-400 text-center">
-      Projecs Page
-    </h1>
+    <SideBar title="Projects" :tabs="tabs" @setActiveTab="setActiveTab" />
+    <ProjectsBRCoFReporting v-if="isActiveTab('BR CoF Reporting')" />
+    <ProjectsDEFDReporting v-if="isActiveTab('DEF D Reporting')" />
+    <ProjectsABCLoanFXConversion v-if="isActiveTab('ABC Loan FX Conversion')" />
+    <ProjectsLR1555Adjustments v-if="isActiveTab('LR1555 Adjustments')" />
     <!-- <GeneralForm :form-schema="formSchema" /> -->
   </main>
 </template>
 
-
 <script setup lang="ts">
-import GeneralForm, { IFormControl } from "@/components/form/GeneralForm.vue";
+// import GeneralForm, { IFormControl } from "@/components/form/GeneralForm.vue";
 // const formSchema: IFormControl[] = [
 //   {
 //     // label: "Title",
@@ -57,18 +57,35 @@ const tabs = [
   {
     tabId: 1,
     tabTitle: "BR CoF Reporting",
+    tabActive: ref(true),
   },
   {
     tabId: 2,
     tabTitle: "DEF D Reporting",
+    tabActive: ref(false),
   },
   {
     tabId: 3,
     tabTitle: "ABC Loan FX Conversion",
+    tabActive: ref(false),
   },
   {
     tabId: 4,
     tabTitle: "LR1555 Adjustments",
+    tabActive: ref(false),
   },
 ];
+
+const setActiveTab = (tab: any) => {
+  tabs.forEach((t) => {
+    t.tabActive.value = false;
+  });
+  tab.tabActive.value = true;
+  activeTab.value = tab.tabTitle;
+};
+
+const activeTab = ref("BR CoF Reporting");
+const isActiveTab = (tab: any) => {
+  return tab === activeTab.value;
+};
 </script>

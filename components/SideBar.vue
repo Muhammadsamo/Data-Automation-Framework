@@ -25,7 +25,8 @@
         v-for="tab in tabs"
         :key="tab.tabId"
         class="w-[274px] h-[28px] text-[12px] font-semibold leading-6 px-[8px] py-[2px] text-[#5B5B5B] bg-[#DCECFA] border border-[#DCDCDC] rounded-[3px] mb-[8px] cursor-pointer hover:bg-[#185E9D] hover:text-[#FFFFFF]"
-        @click="setActiveTab(tab.tabTitle)"
+        :class="{ '!bg-[#185E9D] text-[#FFFFFF]': tab.tabActive.value }"
+        @click="changeActiveTab(tab)"
       >
         {{ tab.tabTitle }}
       </li>
@@ -33,13 +34,19 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 defineProps({ title: String, tabs: Array });
+const emit = defineEmits(["setActiveTab"]);
 const sidebarOpen = ref(true);
 
 const toggleSidebar = () => {
   sidebarOpen.value = !sidebarOpen.value;
 };
+
+function changeActiveTab(tab: any) {
+  emit("setActiveTab", tab);
+  console.log(tab.tabTitle);
+}
 
 // const activeTab = ref("");
 
