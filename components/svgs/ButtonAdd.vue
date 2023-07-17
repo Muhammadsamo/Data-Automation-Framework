@@ -8,7 +8,7 @@
   >
     <path
       d="M13 0C5.824 0 0 5.824 0 13C0 20.176 5.824 26 13 26C20.176 26 26 20.176 26 13C26 5.824 20.176 0 13 0ZM19.5 14.3H14.3V19.5H11.7V14.3H6.5V11.7H11.7V6.5H14.3V11.7H19.5V14.3Z"
-      :fill="fill"
+      :class="[fillClass]"
     />
   </svg>
 </template>
@@ -19,6 +19,6 @@ interface IProps extends ISvgProps {}
 withDefaults(defineProps<IProps>(), {
   width: 26,
   height: 26,
-  fill: "#FFFFFF",
+  fillClass: "#FFFFFF",
 });
 </script>
