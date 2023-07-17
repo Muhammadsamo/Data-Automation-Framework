@@ -33,7 +33,7 @@
                 },
               ]"
               v-bind="{ ...rowMeta, ...row.meta }"
-              @click="onRowClick(i, row)"
+              @click="onRowClick(i)"
             >
               <template v-for="col in columns" :key="col.field">
                 <td class="px-3 py-1 mb-2" :class="col.tdClass">
@@ -128,7 +128,7 @@ const DeleteIcon = resolveComponent("svgs/DeleteIcon");
 const emit = defineEmits(["row-action", "row-click"]);
 
 const collapsed = ref(false);
-const selectedRows = ref([]);
+const selectedRows = ref<number[]>([]);
 
 const onRowClick = (idx: number) => {
   const selectedRowIdx = selectedRows.value.findIndex((index) => index === idx);
@@ -157,6 +157,6 @@ tr:hover {
 .slide-fade-enter-from,
 .slide-fade-leave-to {
   transform: translateY(-100%);
-  opacity:0;
+  opacity: 0;
 }
 </style>

@@ -20,15 +20,17 @@
         v-bind="rest"
         :options="options"
       >
-        <component
-          :is="tag"
-          v-for="({ tag, label: text, ...childAttrs }, idx) in options"
-          :key="idx"
-          v-bind="childAttrs"
-          :options="options"
-        >
-          {{ text }}
-        </component>
+        <template v-if="options">
+          <component
+            :is="tag"
+            v-for="({ tag, label: text, ...childAttrs }, idx) in options"
+            :key="idx"
+            v-bind="childAttrs"
+            :options="options"
+          >
+            {{ text }}
+          </component>
+        </template>
       </component>
     </div>
     <UIButton variant="primary" class="px-3">Submit</UIButton>
@@ -58,7 +60,7 @@ export type IFormControl = {
   rules?: ObjectSchema<any>;
 
   options?: ({
-    tag?: string;
+    tag?: any;
   } & IOption)[];
 } & { [key: string]: any };
 interface IProps {
