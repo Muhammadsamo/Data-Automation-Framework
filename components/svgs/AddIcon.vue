@@ -2,12 +2,12 @@
   <svg
     :width="width"
     :height="height"
-    viewBox="0 0 14 9"
+    viewBox="0 0 20 20"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      d="M12.355 0L7 5.34333L1.645 0L0 1.645L7 8.645L14 1.645L12.355 0Z"
+      d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM15 11H11V15H9V11H5V9H9V5H11V9H15V11Z"
       :class="[fillClass]"
     />
   </svg>
@@ -17,8 +17,8 @@
 import { ISvgProps } from "../../types/general";
 interface IProps extends ISvgProps {}
 withDefaults(defineProps<IProps>(), {
-  width: 14,
-  height: 9,
-  fillClass: "fill-info",
+  width: 20,
+  height: 20,
+  fillClass: "fill-secondary",
 });
 </script>

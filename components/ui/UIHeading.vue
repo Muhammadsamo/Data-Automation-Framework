@@ -1,8 +1,8 @@
 <template>
   <component
     :is="'h' + level"
+    class="text-white font-bold"
     :class="[{ ...fontSizeClass }]"
-    class="text-white"
   >
     <slot />
   </component>
@@ -27,7 +27,7 @@ const fontSizeClass = computed(() => {
     "text-3xl": props.level === 3,
     "text-2xl": props.level === 4,
     "text-xl": props.level === 5,
-    "text-lg": props.level === 6,
+    "text-base": props.level === 6,
   };
 });
 </script>
