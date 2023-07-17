@@ -1,6 +1,6 @@
 <template>
   <main>
-    <SideBar title="Settings" />
+    <UISideBar title="Settings" />
     <h1 class="text-3xl font-bold underline text-green-400 text-center">
       Settings Page
     </h1>
