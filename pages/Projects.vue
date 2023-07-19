@@ -8,7 +8,10 @@
           class="primary flex items-center rounded w-[180px] h-[43px] absolute bottom-[90px]"
         >
           <template #button-prepend>
-            <SvgsButtonAdd class="mr-[11px]"></SvgsButtonAdd>
+            <SvgsAddIcon
+              class="mr-[11px]"
+              fill-class="fill-[#FFFFFF]"
+            ></SvgsAddIcon>
           </template>
         </UIButton>
       </template>

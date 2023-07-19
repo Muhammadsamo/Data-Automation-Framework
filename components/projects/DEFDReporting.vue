@@ -7,5 +7,183 @@
     >
       DEF D Reporting
     </h2>
+    <!-- <DataTable heading="Datasets"></DataTable>
+    <DataTable heading="Datasets Relationships"></DataTable> -->
+    <DataTable
+      heading="Datasets"
+      :columns="dataSetColumns"
+      :rows="dataSetRows"
+      :row-meta="{
+        class: 'bg-light-blue hover:bg-light-pink',
+      }"
+    >
+      <template #cell="{ row, col, value }">
+        <span
+          v-if="col.field === 'issues' && value"
+          class="bg-[#FC960D] w-[18px] h-[18px] flex-center text-white rounded-[5px] mx-auto"
+        >
+          {{ value }}
+        </span>
+      </template>
+    </DataTable>
+    <DataTable
+      heading="Dataset Relationships"
+      :columns="relationshipsColumns"
+      :rows="relationshipsRows"
+      :allow-details="allowDetails"
+      :row-meta="{
+        class: 'bg-light-blue hover:bg-light-pink',
+      }"
+    >
+      <template #cell="{ row, col, value }">
+        <span
+          v-if="col.field === 'issues' && value"
+          class="bg-[#FC960D] w-[18px] h-[18px] flex-center text-white rounded-[5px] mx-auto"
+        >
+          {{ value }}
+        </span>
+      </template>
+    </DataTable>
   </div>
 </template>
+
+<script setup lang="ts">
+const DataTable = resolveComponent("table/DataTable");
+const allowDetails = false;
+
+const dataSetColumns = [
+  {
+    label: "Name",
+    field: "name",
+    sortable: true,
+    tdClass: "underline text-[#5B5B5B] leading-6 text-[12px]",
+    thClass: "font-bold tracking-[1.2px] text-[#5B5B5B] leading-6",
+  },
+  {
+    label: "File Name",
+    field: "fileName",
+    sortable: true,
+    tdClass: "text-[#5B5B5B] leading-6 text-[12px]",
+    thClass: "font-bold tracking-[1.2px] text-[#5B5B5B] leading-6",
+  },
+  {
+    label: "Provider",
+    field: "provider",
+    sortable: true,
+    tdClass: "underline text-[#5B5B5B] leading-6 text-[12px]",
+    thClass: "font-bold tracking-[1.2px] text-[#5B5B5B] leading-6",
+  },
+  {
+    label: "Issues",
+    field: "issues",
+    sortable: true,
+    thClass: "font-bold tracking-[1.2px] text-[#5B5B5B] leading-6 text-center",
+  },
+  {
+    label: "Columns",
+    field: "columns",
+    sortable: true,
+    tdClass: "text-[#5B5B5B] leading-6 text-[12px]",
+    thClass: "font-bold tracking-[1.2px] text-[#5B5B5B] leading-6",
+  },
+  {
+    label: "Rows",
+    field: "rows",
+    sortable: true,
+    tdClass: "text-[#5B5B5B] leading-6 text-[12px]",
+    thClass: "font-bold tracking-[1.2px] text-[#5B5B5B] leading-6",
+  },
+  {
+    label: "Status",
+    field: "status",
+    sortable: true,
+    tdClass: "text-[#5B5B5B] leading-6 text-[12px]",
+    thClass: "font-bold tracking-[1.2px] text-[#5B5B5B] leading-6",
+  },
+];
+
+const relationshipsColumns = [
+  {
+    label: "Left Dataset",
+    field: "leftDataset",
+    sortable: true,
+    tdClass: "underline text-[#5B5B5B] leading-6 text-[12px]",
+    thClass: "font-bold tracking-[1.2px] text-[#5B5B5B] leading-6",
+  },
+  {
+    label: "Right Dataset",
+    field: "rightDataset",
+    sortable: true,
+    tdClass: "underline text-[#5B5B5B] leading-6 text-[12px]",
+    thClass: "font-bold tracking-[1.2px] text-[#5B5B5B] leading-6",
+  },
+  {
+    label: "Type",
+    field: "type",
+    sortable: true,
+    tdClass: "text-[#5B5B5B] leading-6 text-[12px]",
+    thClass: "font-bold tracking-[1.2px] text-[#5B5B5B] leading-6",
+  },
+  {
+    label: "Columns",
+    field: "columns",
+    sortable: true,
+    tdClass: "text-[#5B5B5B] leading-6 text-[12px]",
+    thClass: "font-bold tracking-[1.2px] text-[#5B5B5B] leading-6",
+  },
+];
+
+const dataSetRows = [
+  {
+    name: "MarketReturns",
+    fileName: "MarketReturns_{YYYY}-{MM}.xlsx",
+    provider: "Bloomberg",
+    issues: 1,
+    columns: "4 / 10",
+    rows: "18,125",
+    status: "Completed",
+  },
+  {
+    name: "FinancialStatements",
+    fileName: "FinancialStatements_{YYYY}-{MM}.txt",
+    provider: "Brookfield",
+    columns: "3 / 5",
+    rows: "12,204",
+    status: "Completed",
+    meta: {
+      disableDetails: true,
+    },
+  },
+  {
+    name: "BondYields",
+    fileName: "BondYields_{YYYY}-{MM}.xlsx",
+    provider: "Leonardo",
+    issues: 3,
+    columns: "5 / 15",
+    rows: "1,264",
+    status: "In Progress",
+  },
+  {
+    name: "PortfolioHoldings",
+    fileName: "PortfolioHoldings_{YYYY}-{MM}.xlsx",
+    provider: "Bloomberg",
+    columns: "4 / 10",
+    rows: "389",
+    status: "To Do",
+  },
+];
+const relationshipsRows = [
+  {
+    leftDataset: "MarketReturns",
+    rightDataset: "PortfolioHoldings",
+    type: "1:1",
+    columns: "1",
+  },
+  {
+    leftDataset: "FinancialStatements",
+    rightDataset: "BondYields",
+    type: "1:N",
+    columns: "3",
+  },
+];
+</script>

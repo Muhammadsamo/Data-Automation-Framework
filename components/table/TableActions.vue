@@ -4,7 +4,10 @@
       <button @click="toggleTableCollapse">
         <ChevronDown :class="{ '-rotate-90': collapsed }" />
       </button>
-      <UIHeading :level="6" class="!text-dark !font-medium ml-4">
+      <UIHeading
+        :level="6"
+        class="!text-dark !font-medium ml-4 tracking-[1.6px]"
+      >
         {{ heading }}
       </UIHeading>
     </div>

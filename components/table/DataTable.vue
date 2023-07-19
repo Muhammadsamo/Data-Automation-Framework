@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto border-table-border overflow-hidden">
+  <div class="mx-auto border-table-border overflow-hidden my-6">
     <TableActions
       v-model:collapsed="collapsed"
       :actions="['view', 'download', 'upload', 'add']"
