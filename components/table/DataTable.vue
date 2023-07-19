@@ -23,74 +23,98 @@
             </tr>
           </thead>
           <tbody>
-            <tr
-              v-for="(row, i) in rows"
-              :key="i"
-              :class="[
-                {
-                  'border-white border-b': i < rows.length - 1,
-                  '!bg-light-pink': selectedRows.includes(i),
-                },
-              ]"
-              v-bind="{ ...rowMeta, ...row.meta }"
-              @click="onRowClick(i)"
-            >
-              <template v-for="col in columns" :key="col.field">
-                <td class="px-3 py-1 mb-2" :class="col.tdClass">
-                  <slot
-                    name="cell"
-                    :row="row"
-                    :col="col"
-                    :value="row[col.field]"
-                  >
-                    <span v-if="row[col.field] != null">{{
-                      row[col.field]
-                    }}</span>
-                  </slot>
-                </td>
-              </template>
-              <td
-                class="flex justify-end pr-[18px] items-center min-h-[32px] py-1"
-              >
-                <button
-                  v-if="allowDetails"
-                  :disabled="row.meta && row.meta.disableDetails"
-                  class="mr-2"
-                  @click.stop="
-                    emit('row-action', {
-                      type: 'show-details',
-                      row,
-                      i,
-                    })
-                  "
-                >
-                  <TableIcon
-                    :fill-class="
-                      row.meta && row.meta.disableDetails
-                        ? 'fill-disabled'
-                        : undefined
-                    "
-                  />
-                </button>
-                <button
-                  v-if="allowDelete"
-                  @click.stop="
-                    emit('row-action', {
-                      type: 'delete',
-                      row,
-                      i,
-                    })
-                  "
-                >
-                  <DeleteIcon />
-                </button>
-                <slot name="table-actions" :row-index="i" :row="row"></slot>
+            <tr v-if="loading">
+              <td colspan="99" class="py-3">
+                <UISpinner class="mx-auto" />
               </td>
             </tr>
+            <tr v-else-if="!rows.length">
+              <td colspan="99" class="py-3">
+                <UINotFound class="text-center" />
+              </td>
+            </tr>
+            <template v-else>
+              <tr
+                v-for="(row, i) in rows"
+                :key="i"
+                class="bg-light-pink hover:bg-light-pink"
+                :class="[
+                  {
+                    'border-white border-b': i < rows.length - 1,
+
+                    // '!bg-light-pink': selectedRows.includes(i),
+                  },
+                ]"
+                v-bind="{ ...rowMeta, ...row.meta }"
+              >
+                <template v-for="col in columns" :key="col.field">
+                  <td class="px-3 py-1 mb-2" :class="col.tdClass">
+                    <slot
+                      name="cell"
+                      :row="row"
+                      :col="col"
+                      :value="row[col.field]"
+                    >
+                      <span v-if="row[col.field] != null">{{
+                        row[col.field]
+                      }}</span>
+                    </slot>
+                  </td>
+                </template>
+                <td>
+                  <button
+                    v-if="allowDetails"
+                    :disabled="row.meta && row.meta.disableDetails"
+                    class="mr-2"
+                    @click.stop="
+                      emit('row-action', {
+                        type: 'show-details',
+                        row,
+                        i,
+                      })
+                    "
+                  >
+                    <TableIcon
+                      :fill-class="
+                        row.meta && row.meta.disableDetails
+                          ? 'fill-disabled'
+                          : undefined
+                      "
+                    />
+                  </button>
+                  <slot
+                    name="row-actions-middle"
+                    :row-index="i"
+                    :row="row"
+                  ></slot>
+                  <button
+                    v-if="allowDelete"
+                    @click.stop="
+                      emit('row-action', {
+                        type: 'delete',
+                        row,
+                        i,
+                      })
+                    "
+                  >
+                    <DeleteIcon />
+                  </button>
+                  <slot name="row-actions" :row-index="i" :row="row"></slot>
+                </td>
+              </tr>
+            </template>
           </tbody>
         </table>
       </div>
     </Transition>
+    <UIPagination
+      :page="1"
+      :total-pages="4"
+      :total="40"
+      :per-page="10"
+      :current-page="1"
+      :has-more-pages="true"
+    />
   </div>
 </template>
 
@@ -118,29 +142,31 @@ interface IProps {
   allowDetails?: boolean;
   allowDelete?: boolean;
   heading?: string;
+  loading?: boolean;
 }
 
 withDefaults(defineProps<IProps>(), {
   allowDetails: true,
   allowDelete: true,
   defaultRowActions: () => ["show-details", "delete"],
+  loading: false,
 });
 const TableIcon = resolveComponent("svgs/TableIcon");
 const DeleteIcon = resolveComponent("svgs/DeleteIcon");
 const emit = defineEmits(["row-action", "row-click"]);
 
 const collapsed = ref(false);
-const selectedRows = ref<number[]>([]);
+// const selectedRows = ref<number[]>([]);
 
-const onRowClick = (idx: number) => {
-  const selectedRowIdx = selectedRows.value.findIndex((index) => index === idx);
-  if (selectedRowIdx > -1) {
-    selectedRows.value.splice(selectedRowIdx, 1);
-  } else {
-    selectedRows.value.push(idx);
-  }
-  emit("row-click", { selectedRows });
-};
+// const onRowClick = (idx: number) => {
+//   const selectedRowIdx = selectedRows.value.findIndex((index) => index === idx);
+//   if (selectedRowIdx > -1) {
+//     selectedRows.value.splice(selectedRowIdx, 1);
+//   } else {
+//     selectedRows.value.push(idx);
+//   }
+//   emit("row-click", { selectedRows });
+// };
 </script>
 
 <style scoped>
