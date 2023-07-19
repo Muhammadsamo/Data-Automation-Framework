@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto border-table-border overflow-hidden">
+  <div class="mx-auto border-table-border overflow-hidden my-6">
     <TableActions
       v-model:collapsed="collapsed"
       :actions="['view', 'download', 'upload', 'add']"
@@ -49,7 +49,9 @@
                   </slot>
                 </td>
               </template>
-              <td>
+              <td
+                class="flex justify-end pr-[18px] items-center min-h-[32px] py-1"
+              >
                 <button
                   v-if="allowDetails"
                   :disabled="row.meta && row.meta.disableDetails"
