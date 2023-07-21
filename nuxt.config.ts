@@ -11,7 +11,10 @@ export default defineNuxtConfig({
     global: true,
     dirs: ["~/components"],
   },
-  css: ["~/assets/css/main.css"],
+  css: [
+    "@fortawesome/fontawesome-svg-core/styles.css",
+    "~/assets/css/main.css",
+  ],
   postcss: {
     plugins: {
       tailwindcss: {},
