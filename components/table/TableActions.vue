@@ -13,7 +13,11 @@
     </div>
     <div class="ml-auto flex">
       <button v-for="action in actions" :key="action" class="mr-3">
-        <component :is="components[action]" />
+        <font-awesome-icon
+          :icon="['fas', icons[action]]"
+          size="lg"
+          class="text-secondary"
+        />
       </button>
     </div>
   </div>
@@ -21,12 +25,8 @@
 
 <script setup lang="ts">
 const ChevronDown = resolveComponent("svgs/ChevronDown");
-const DocIcon = resolveComponent("svgs/DocIcon");
-const UpArrow = resolveComponent("svgs/UpArrow");
-const DownArrow = resolveComponent("svgs/DownArrow");
-const AddIcon = resolveComponent("svgs/AddIcon");
 
-type tableActions = "view" | "download" | "upload" | "add";
+type tableActions = "view" | "downward" | "upward" | "add";
 
 interface IProps {
   heading?: string;
@@ -36,11 +36,11 @@ interface IProps {
 const props = defineProps<IProps>();
 const emit = defineEmits(["update:collapsed"]);
 
-const components = {
-  view: DocIcon,
-  upload: UpArrow,
-  download: DownArrow,
-  add: AddIcon,
+const icons = {
+  view: "file-lines",
+  upward: "circle-arrow-up",
+  downward: "circle-arrow-down",
+  add: "circle-plus",
 };
 
 const toggleTableCollapse = () => emit("update:collapsed", !props.collapsed);

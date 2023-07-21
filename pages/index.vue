@@ -4,7 +4,12 @@
     <h1 class="text-3xl font-bold underline text-green-400 text-center">
       Home Page
     </h1>
-    <TableDataTable heading="Datasets" :columns="columns" :rows="rows" :loading="true">
+    <TableDataTable
+      heading="Datasets"
+      :columns="columns"
+      :rows="rows"
+      :loading="false"
+    >
       <template #cell="{ row, col, value }">
         <span
           v-if="col.field === 'issues' && value"
@@ -15,10 +20,9 @@
       </template>
       <template #row-actions-middle="{ row }">
         <button class="mr-2" @click="setStatus(row)">
-          <SvgsCheckCircle
-            :fill-class="
-              row.status != 'completed' ? 'fill-info' : 'fill-disabled'
-            "
+          <font-awesome-icon
+            :class="row.status != 'completed' ? 'text-info' : 'text-disabled'"
+            :icon="['far', 'circle-check']"
           />
         </button>
       </template>
@@ -57,27 +61,27 @@ const columns = [
 ];
 
 const rows = ref([
-  // {
-  //   id: 1,
-  //   name: "MarketReturns",
-  //   fileName: "FinancialStatements_{YYYY}-{MM}.txt",
-  //   provider: "Bloomberg",
-  //   issues: 1,
-  //   status: "completed",
-  //   meta: {
-  //     class: "!bg-light-blue",
-  //   },
-  // },
-  // {
-  //   id: 2,
-  //   name: "FinancialStatements",
-  //   fileName: "MarketReturns_{YYYY}-{MM}.xlsx",
-  //   provider: "Brookfield",
-  //   meta: {
-  //     disableDetails: true,
-  //   },
-  //   status: "In Progress",
-  // },
+  {
+    id: 1,
+    name: "MarketReturns",
+    fileName: "FinancialStatements_{YYYY}-{MM}.txt",
+    provider: "Bloomberg",
+    issues: 1,
+    status: "completed",
+    meta: {
+      class: "!bg-light-blue",
+    },
+  },
+  {
+    id: 2,
+    name: "FinancialStatements",
+    fileName: "MarketReturns_{YYYY}-{MM}.xlsx",
+    provider: "Brookfield",
+    meta: {
+      disableDetails: true,
+    },
+    status: "In Progress",
+  },
 ]);
 
 const setStatus = (row: Record<string, any>) => {

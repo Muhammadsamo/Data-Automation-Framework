@@ -2,7 +2,7 @@
   <div class="mx-auto border-table-border overflow-hidden my-6">
     <TableActions
       v-model:collapsed="collapsed"
-      :actions="['view', 'download', 'upload', 'add']"
+      :actions="['view', 'downward', 'upward', 'add']"
       :heading="heading"
       class="border-table-border border border-b-0 relative z-10"
     />
@@ -74,11 +74,12 @@
                       })
                     "
                   >
-                    <TableIcon
-                      :fill-class="
+                    <font-awesome-icon
+                      :icon="['fas', 'table-list']"
+                      :class="
                         row.meta && row.meta.disableDetails
-                          ? 'fill-disabled'
-                          : undefined
+                          ? 'text-disabled'
+                          : 'text-info'
                       "
                     />
                   </button>
@@ -97,7 +98,10 @@
                       })
                     "
                   >
-                    <DeleteIcon />
+                    <font-awesome-icon
+                      class="text-info"
+                      :icon="['fas', 'trash']"
+                    />
                   </button>
                   <slot name="row-actions" :row-index="i" :row="row"></slot>
                 </td>
