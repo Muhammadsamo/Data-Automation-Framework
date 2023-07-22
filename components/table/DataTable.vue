@@ -155,8 +155,7 @@ withDefaults(defineProps<IProps>(), {
   defaultRowActions: () => ["show-details", "delete"],
   loading: false,
 });
-const TableIcon = resolveComponent("svgs/TableIcon");
-const DeleteIcon = resolveComponent("svgs/DeleteIcon");
+
 const emit = defineEmits(["row-action", "row-click"]);
 
 const collapsed = ref(false);

@@ -2,7 +2,9 @@
   <div class="bg-medium-blue px-3 py-2 flex items-center">
     <div class="flex items-center">
       <button @click="toggleTableCollapse">
-        <ChevronDown :class="{ '-rotate-90': collapsed }" />
+        <font-awesome-icon
+          :icon="['fas', collapsed ? 'chevron-right' : 'chevron-down']"
+        />
       </button>
       <UIHeading
         :level="6"
@@ -24,8 +26,6 @@
 </template>
 
 <script setup lang="ts">
-const ChevronDown = resolveComponent("svgs/ChevronDown");
-
 type tableActions = "view" | "downward" | "upward" | "add";
 
 interface IProps {
