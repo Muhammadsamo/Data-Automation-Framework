@@ -5,6 +5,7 @@
       :actions="['view', 'downward', 'upward', 'add']"
       :heading="heading"
       class="border-table-border border border-b-0 relative z-10"
+      @action-click="emit('action-click', $event)"
     />
     <Transition name="slide-fade">
       <div v-if="!collapsed" class="border-table-border border border-t-0">
@@ -111,14 +112,14 @@
         </table>
       </div>
     </Transition>
-    <UIPagination
+    <!-- <UIPagination
       :page="1"
       :total-pages="4"
       :total="40"
       :per-page="10"
       :current-page="1"
       :has-more-pages="true"
-    />
+    /> -->
   </div>
 </template>
 
@@ -155,9 +156,8 @@ withDefaults(defineProps<IProps>(), {
   defaultRowActions: () => ["show-details", "delete"],
   loading: false,
 });
-const TableIcon = resolveComponent("svgs/TableIcon");
-const DeleteIcon = resolveComponent("svgs/DeleteIcon");
-const emit = defineEmits(["row-action", "row-click"]);
+
+const emit = defineEmits(["row-action", "row-click", "action-click"]);
 
 const collapsed = ref(false);
 // const selectedRows = ref<number[]>([]);

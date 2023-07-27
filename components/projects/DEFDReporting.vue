@@ -8,6 +8,7 @@
       DEF D Reporting
     </h2>
     <DataTable
+
       heading="Datasets"
       :columns="dataSetColumns"
       :rows="rows"
@@ -21,10 +22,15 @@
           {{ value }}
         </span>
       </template>
+
       <template #row-actions-middle="{ row }">
         <button class="mr-2" @click="setStatus(row)">
           <font-awesome-icon
-            :class="row.status != 'completed' ? 'text-info' : 'text-disabled'"
+            :class="
+              row.status != RowStatuses.Completed
+                ? 'text-info'
+                : 'text-disabled'
+            "
             :icon="['far', 'circle-check']"
           />
         </button>
@@ -52,13 +58,16 @@
 </template>
 
 <script setup lang="ts">
+import { RowStatuses } from "@/types/general";
+
 const DataTable = resolveComponent("table/DataTable");
 const allowDetails = false;
 
 const setStatus = (row: Record<string, any>) => {
   const completedRow = rows.value.find((_row) => row.id === _row.id);
   if (completedRow) {
-    completedRow.status = "completed";
+    completedRow.status = RowStatuses.Completed;
+    console.log(completedRow);
     completedRow.meta = {
       ...completedRow.meta,
       class: `${completedRow.meta.class} !bg-light-blue`,
@@ -150,45 +159,51 @@ const relationshipsColumns = [
 
 const rows = ref([
   {
+    id: 1,
     name: "MarketReturns",
     fileName: "MarketReturns_{YYYY}-{MM}.xlsx",
     provider: "Bloomberg",
     issues: 1,
     columns: "4 / 10",
     rows: "18,125",
-    status: "Completed",
+    status: RowStatuses.Completed,
     meta: {
       class: "!bg-light-blue",
     },
   },
   {
+    id: 2,
     name: "FinancialStatements",
     fileName: "FinancialStatements_{YYYY}-{MM}.txt",
     provider: "Brookfield",
     columns: "3 / 5",
     rows: "12,204",
-    status: "Completed",
+    status: RowStatuses.Completed,
     meta: {
       class: "!bg-light-blue",
       disableDetails: true,
     },
   },
   {
+    id: 3,
     name: "BondYields",
     fileName: "BondYields_{YYYY}-{MM}.xlsx",
     provider: "Leonardo",
     issues: 3,
     columns: "5 / 15",
     rows: "1,264",
-    status: "In Progress",
+    status: RowStatuses.InProgress,
+    meta: {},
   },
   {
+    id: 4,
     name: "PortfolioHoldings",
     fileName: "PortfolioHoldings_{YYYY}-{MM}.xlsx",
     provider: "Bloomberg",
     columns: "4 / 10",
     rows: "389",
-    status: "To Do",
+    status: RowStatuses.Todo,
+    meta: {},
   },
 ]);
 const relationshipsRows = [

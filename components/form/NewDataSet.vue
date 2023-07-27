@@ -1,5 +1,5 @@
 <template>
-  <div
+  <!-- <div
     class="absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 w-[528px] h-[447px] bg-[#FFFFFF] flex flex-col items-center justify-center"
   >
     <header
@@ -10,32 +10,36 @@
         class="flex justify-between text-[12px] text-info items-center gap-[6px] cursor-pointer"
         >Cancel<SvgsCloseCircle></SvgsCloseCircle
       ></span>
-    </header>
-    <GeneralForm :form-schema="formSchema" class="mt-[74px]">
-      <template #genralForm-append>
-        <div class="flex justify-between items-center">
-          <UIButton
-            text="Add New"
-            variant="primary"
-            class="primary flex items-center rounded h-[43px]"
-            @click="onSubmit"
-          >
-            <template #button-prepend>
-              <SvgsAddIcon
-                class="mr-[11px]"
-                fill-class="fill-[#FFFFFF]"
-              ></SvgsAddIcon>
-            </template>
-          </UIButton>
-          <span
-            v-if="submitted"
-            class="text-light-green text-base tracking-[1.6px]"
-            >Dataset added successfully.</span
-          >
-        </div>
-      </template>
-    </GeneralForm>
-  </div>
+    </header> -->
+  <GeneralForm
+    :form-schema="formSchema"
+    class="mt-[4.625rem]"
+    :initialValues="{ provider: '', type: '', status: '' }"
+  >
+    <template #genralForm-append>
+      <div class="flex justify-between items-center">
+        <UIButton
+          text="Add New"
+          variant="primary"
+          class="primary flex items-center rounded h-[43px]"
+          @click="onSubmit"
+        >
+          <template #button-prepend>
+            <SvgsAddIcon
+              class="mr-[11px]"
+              fill-class="fill-[#FFFFFF]"
+            ></SvgsAddIcon>
+          </template>
+        </UIButton>
+        <span
+          v-if="submitted"
+          class="text-light-green text-base tracking-[1.6px]"
+          >Dataset added successfully.</span
+        >
+      </div>
+    </template>
+  </GeneralForm>
+  <!-- </div> -->
 </template>
 
 <script setup lang="ts">
@@ -69,6 +73,11 @@ const formSchema: IFormControl[] = [
     class: "w-[470px] mb-[10px] h-[30px] text-gray text-[12px]",
     options: [
       {
+        label: "Provider",
+        value: "",
+        tag: "option",
+      },
+      {
         label: "provider1",
         value: "provider1",
         tag: "option",
@@ -86,6 +95,11 @@ const formSchema: IFormControl[] = [
     as: "SelectInput",
     class: "w-[470px] mb-[10px] h-[30px] text-gray text-[12px]",
     options: [
+      {
+        label: "Type",
+        value: "",
+        tag: "option",
+      },
       {
         label: "Actuals",
         value: "Actuals",
@@ -109,6 +123,11 @@ const formSchema: IFormControl[] = [
     as: "SelectInput",
     class: "w-[470px] mb-[10px] h-[30px] text-gray text-[12px]",
     options: [
+      {
+        label: "Status",
+        value: "",
+        tag: "option",
+      },
       {
         label: "To do",
         value: "To do",

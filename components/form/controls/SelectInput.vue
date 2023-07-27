@@ -23,8 +23,9 @@
       </select>
     </template>
     <template #control-append>
-      <ChevronDown
-        class="absolute top-[50%] right-[12px] -translate-y-[50%] select-none pointer-events-none"
+      <font-awesome-icon
+        :icon="['fas', 'chevron-down']"
+        class="absolute top-[50%] right-[12px] -translate-y-[50%] select-none pointer-events-none text-info"
       />
     </template>
   </FormControl>
@@ -33,7 +34,7 @@
 <script setup lang="ts">
 import { IFormControl } from "../GeneralForm.vue";
 import FormControl from "./FormControl.vue";
-import ChevronDown from "@/components/svgs/ChevronDown.vue";
+
 type IProps = IFormControl;
 defineProps<IProps>();
 </script>

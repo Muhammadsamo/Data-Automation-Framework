@@ -22,13 +22,9 @@
     <ProjectsABCLoanFXConversion v-if="isActiveTab('ABC Loan FX Conversion')" />
     <ProjectsLR1555Adjustments v-if="isActiveTab('LR1555 Adjustments')" />
 
-    <UIBackdrop
-      :show="showModal"
-      :interactive-backdrop="interactiveBackdrop"
-      @click="closeModal"
-    >
+    <UIModal v-model:show="showModal" heading="New Dataset">
       <NewDataSet></NewDataSet>
-    </UIBackdrop>
+    </UIModal>
   </main>
 </template>
 
@@ -36,11 +32,6 @@
 import NewDataSet from "@/components/form/NewDataSet.vue";
 
 const showModal = ref(false);
-const interactiveBackdrop = ref(true);
-
-const closeModal = () => {
-  showModal.value = false;
-};
 
 const addProject = () => {
   showModal.value = true;

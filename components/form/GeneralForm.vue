@@ -1,5 +1,9 @@
 <template>
-  <Form :validation-schema="validationSchema" @submit="onSubmit">
+  <Form
+    :validation-schema="validationSchema"
+    v-bind="$attrs"
+    @submit="onSubmit"
+  >
     <div>
       <component
         :is="inputs[control as keyof typeof inputs]"

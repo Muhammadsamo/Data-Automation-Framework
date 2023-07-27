@@ -31,13 +31,7 @@
             </div>
             <!-- Modal Body -->
             <div class="px-7 py-5">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
-              eligendi sunt accusantium inventore corrupti enim nulla recusandae
-              voluptatibus consequuntur aperiam non suscipit et necessitatibus
-              repellendus distinctio accusamus asperiores eius, porro quisquam
-              iure repudiandae eveniet temporibus aspernatur omnis. Tenetur id
-              provident pariatur nostrum aspernatur dignissimos laboriosam culpa
-              adipisci! Aliquam, ipsum excepturi.
+              <slot />
             </div>
           </div>
         </Transition>
