@@ -6,3 +6,9 @@ export interface ISvgProps {
   fillClass?: string;
   stroke?: string;
 }
+
+export enum RowStatuses {
+  Completed = "Completed",
+  Todo = "Todo",
+  InProgress = "InProgress",
+}

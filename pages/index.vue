@@ -9,6 +9,7 @@
       :columns="columns"
       :rows="rows"
       :loading="false"
+      @action-click="onActionClick"
     >
       <template #cell="{ row, col, value }">
         <span
@@ -93,6 +94,10 @@ const setStatus = (row: Record<string, any>) => {
       class: `${completedRow.meta.class} !bg-light-blue`,
     };
   }
+};
+
+const onActionClick = () => {
+  console.log("running");
 };
 // const show = ref(false);
 </script>

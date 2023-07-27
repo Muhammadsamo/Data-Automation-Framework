@@ -8,8 +8,16 @@ import {
   faTrash,
   faTriangleExclamation,
   faCircleCheck,
+  faFileLines,
+  faCircleArrowUp,
+  faCircleArrowDown,
+  faCirclePlus,
+  faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { faCalendar } from "@fortawesome/free-regular-svg-icons";
+import {
+  faCalendar,
+  faCircleCheck as farCircleCheck,
+} from "@fortawesome/free-regular-svg-icons";
 
 // This is important, we are going to let Nuxt worry about the CSS
 config.autoAddCss = false;
@@ -23,6 +31,12 @@ library.add({
   faTrash,
   faTriangleExclamation,
   faCircleCheck,
+  faFileLines,
+  faCircleArrowUp,
+  faCircleArrowDown,
+  faCirclePlus,
+  farCircleCheck,
+  faChevronRight,
 });
 library.add({
   faCalendar,

@@ -6,6 +6,7 @@
           text="New Project"
           variant="primary"
           class="primary flex items-center rounded w-[180px] h-[43px] absolute bottom-[90px]"
+          @click="addProject"
         >
           <template #button-prepend>
             <SvgsAddIcon
@@ -20,52 +21,108 @@
     <ProjectsDEFDReporting v-if="isActiveTab('DEF D Reporting')" />
     <ProjectsABCLoanFXConversion v-if="isActiveTab('ABC Loan FX Conversion')" />
     <ProjectsLR1555Adjustments v-if="isActiveTab('LR1555 Adjustments')" />
-    <!-- <GeneralForm :form-schema="formSchema" /> -->
+
+    <UIModal v-model:show="showModal" heading="New Dataset">
+      <NewDataSet></NewDataSet>
+    </UIModal>
   </main>
 </template>
 
 <script setup lang="ts">
-// import GeneralForm, { IFormControl } from "@/components/form/GeneralForm.vue";
+import NewDataSet from "@/components/form/NewDataSet.vue";
+
+const showModal = ref(false);
+
+const addProject = () => {
+  showModal.value = true;
+};
+
 // const formSchema: IFormControl[] = [
 //   {
 //     // label: "Title",
-//     name: "title",
+//     name: "name",
 //     as: "TextInput",
-//     placeholder: "Description",
+//     placeholder: "Name",
 //     class: "w-80",
 //   },
 //   {
 //     // label: "Title",
-//     name: "description",
+//     name: "file-name",
 //     as: "TextArea",
-//     placeholder: "Description",
+//     placeholder: "File Name",
 //     class: "w-80",
 //   },
 //   {
 //     // label: "Title",
-//     name: "accessLevel",
+//     name: "provider",
 //     as: "SelectInput",
 //     class: "w-80",
 //     options: [
 //       {
-//         label: "Owner",
-//         value: "owner",
+//         label: "provider1",
+//         value: "provider1",
 //         tag: "option",
 //       },
 //       {
-//         label: "Editor",
-//         value: "editor",
+//         label: "provider2",
+//         value: "provider2",
+//         tag: "option",
+//       },
+//     ],
+//   },
+//   {
+//     // label: "Title",
+//     name: "Type",
+//     as: "SelectInput",
+//     class: "w-80",
+//     options: [
+//       {
+//         label: "Actuals",
+//         value: "Actuals",
+//         tag: "option",
+//       },
+//       {
+//         label: "Referential",
+//         value: "Referential",
+//         tag: "option",
+//       },
+//       {
+//         label: "Output",
+//         value: "Output",
+//         tag: "option",
+//       },
+//     ],
+//   },
+//   {
+//     // label: "Title",
+//     name: "Status",
+//     as: "SelectInput",
+//     class: "w-80",
+//     options: [
+//       {
+//         label: "To do",
+//         value: "To do",
+//         tag: "option",
+//       },
+//       {
+//         label: "In Progress",
+//         value: "In Progress",
+//         tag: "option",
+//       },
+//       {
+//         label: "Completed",
+//         value: "Completed",
 //         tag: "option",
 //       },
 //     ],
 //   },
 
-//   {
-//     name: "startDate",
-//     as: "DatePickerInput",
-//     placeholder: "Description",
-//     class: "w-80",
-//   },
+//   // {
+//   //   name: "startDate",
+//   //   as: "DatePickerInput",
+//   //   placeholder: "Description",
+//   //   class: "w-80",
+//   // },
 // ];
 
 const tabs = [

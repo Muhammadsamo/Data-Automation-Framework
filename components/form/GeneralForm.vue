@@ -1,5 +1,9 @@
 <template>
-  <Form :validation-schema="validationSchema" @submit="onSubmit">
+  <Form
+    :validation-schema="validationSchema"
+    v-bind="$attrs"
+    @submit="onSubmit"
+  >
     <div>
       <component
         :is="inputs[control as keyof typeof inputs]"
@@ -33,7 +37,7 @@
         </template>
       </component>
     </div>
-    <UIButton variant="primary" class="px-3">Submit</UIButton>
+    <slot name="genralForm-append" />
   </Form>
 </template>
 <script setup lang="ts">

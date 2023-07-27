@@ -14,7 +14,12 @@
       </UIHeading>
     </div>
     <div class="ml-auto flex">
-      <button v-for="action in actions" :key="action" class="mr-3">
+      <button
+        v-for="action in actions"
+        :key="action"
+        class="mr-3"
+        @click="emit('action-click', action)"
+      >
         <font-awesome-icon
           :icon="['fas', icons[action]]"
           size="lg"
@@ -34,7 +39,7 @@ interface IProps {
   collapsed: boolean;
 }
 const props = defineProps<IProps>();
-const emit = defineEmits(["update:collapsed"]);
+const emit = defineEmits(["update:collapsed", "action-click"]);
 
 const icons = {
   view: "file-lines",
