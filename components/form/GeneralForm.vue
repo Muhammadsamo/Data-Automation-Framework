@@ -33,7 +33,7 @@
         </template>
       </component>
     </div>
-    <UIButton variant="primary" class="px-3">Submit</UIButton>
+    <slot name="genralForm-append" />
   </Form>
 </template>
 <script setup lang="ts">

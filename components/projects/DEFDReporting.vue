@@ -7,15 +7,11 @@
     >
       DEF D Reporting
     </h2>
-    <!-- <DataTable heading="Datasets"></DataTable>
-    <DataTable heading="Datasets Relationships"></DataTable> -->
     <DataTable
       heading="Datasets"
       :columns="dataSetColumns"
-      :rows="dataSetRows"
-      :row-meta="{
-        class: 'bg-light-blue hover:bg-light-pink',
-      }"
+      :rows="rows"
+      :loading="false"
     >
       <template #cell="{ row, col, value }">
         <span
@@ -24,6 +20,14 @@
         >
           {{ value }}
         </span>
+      </template>
+      <template #row-actions-middle="{ row }">
+        <button class="mr-2" @click="setStatus(row)">
+          <font-awesome-icon
+            :class="row.status != 'completed' ? 'text-info' : 'text-disabled'"
+            :icon="['far', 'circle-check']"
+          />
+        </button>
       </template>
     </DataTable>
     <DataTable
@@ -50,6 +54,17 @@
 <script setup lang="ts">
 const DataTable = resolveComponent("table/DataTable");
 const allowDetails = false;
+
+const setStatus = (row: Record<string, any>) => {
+  const completedRow = rows.value.find((_row) => row.id === _row.id);
+  if (completedRow) {
+    completedRow.status = "completed";
+    completedRow.meta = {
+      ...completedRow.meta,
+      class: `${completedRow.meta.class} !bg-light-blue`,
+    };
+  }
+};
 
 const dataSetColumns = [
   {
@@ -133,7 +148,7 @@ const relationshipsColumns = [
   },
 ];
 
-const dataSetRows = [
+const rows = ref([
   {
     name: "MarketReturns",
     fileName: "MarketReturns_{YYYY}-{MM}.xlsx",
@@ -142,6 +157,9 @@ const dataSetRows = [
     columns: "4 / 10",
     rows: "18,125",
     status: "Completed",
+    meta: {
+      class: "!bg-light-blue",
+    },
   },
   {
     name: "FinancialStatements",
@@ -151,6 +169,7 @@ const dataSetRows = [
     rows: "12,204",
     status: "Completed",
     meta: {
+      class: "!bg-light-blue",
       disableDetails: true,
     },
   },
@@ -171,7 +190,7 @@ const dataSetRows = [
     rows: "389",
     status: "To Do",
   },
-];
+]);
 const relationshipsRows = [
   {
     leftDataset: "MarketReturns",

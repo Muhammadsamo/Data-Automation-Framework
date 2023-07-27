@@ -19,6 +19,6 @@ interface IProps extends ISvgProps {}
 withDefaults(defineProps<IProps>(), {
   width: 15,
   height: 15,
-  fillClass: "fill-info"
+  fillClass: "fill-info",
 });
 </script>
